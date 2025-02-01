@@ -2,9 +2,9 @@ package org.example.itkissues;
 
 public class Order {
     private final String product;
-    private final double cost;
+    private final int cost;
 
-    public Order(String product, double cost) {
+    public Order(String product, int cost) {
         this.product = product;
         this.cost = cost;
     }
@@ -13,7 +13,7 @@ public class Order {
         return product;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 }

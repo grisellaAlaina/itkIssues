@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @SpringBootApplication
@@ -15,27 +17,39 @@ public class ItkIssuesApplication {
     public static void main(String[] args) {
         SpringApplication.run(ItkIssuesApplication.class, args);
 
+        List<Order> orders = Stream.generate(() -> new Order(
+                "AliExpressProduct" + (char)('a' + new Random().nextInt()),
+                new Random().nextInt(1500)
+        ))
+                .limit(5)
+                .flatMap(order -> {
+                    if(order.getCost() < 750) {
+                        return Stream.of(order, new Order(order.getProduct(), order.getCost()));
+                    } else {
+                        return Stream.of(order);
+                    }
+                })
+                .toList();
 
-        List<Order> orders = Arrays.asList(
-                new Order("ProductA", 100),
-                new Order("ProductB", 200),
-                new Order("ProductA", 150),
-                new Order("ProductC", 300),
-                new Order("ProductD", 2)
-        );
 
-        Map<String, Double> totalCostByProduct = orders.stream()
-                .collect(Collectors.groupingBy(Order::getProduct,
-                        Collectors.summingDouble(Order::getCost)));
+        System.out.println("Product list:");
+        orders.forEach(order -> System.out.println(order.getProduct() + ": " + order.getCost()));
 
-        List<Map.Entry<String, Double>> sortedProducts = totalCostByProduct.entrySet().stream()
-                .sorted((e1, e2) -> Double.compare(e2.getValue(), e1.getValue()))
+        List<Map.Entry<String, Integer>> topProducts = orders.stream()
+                .collect(Collectors.groupingBy(
+                        Order::getProduct,
+                        Collectors.summingInt(Order::getCost)
+                ))
+                .entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .limit(3)
-                .collect(Collectors.toList());
+                .toList();
 
-        System.out.println("Top 3 most expensive products:");
-        for (Map.Entry<String, Double> entry : sortedProducts) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
+        System.out.println("------top list:");
+        topProducts.forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+
+
+
     }
-}
+
+    }
