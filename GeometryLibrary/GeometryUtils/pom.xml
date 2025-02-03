@@ -5,12 +5,13 @@
         <groupId>org.example</groupId>
         <artifactId>itkIssues</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>GeometryApp</artifactId>
+    <artifactId>GeometryUtils</artifactId>
     <packaging>jar</packaging>
 
-    <name>GeometryApp</name>
+    <name>GeometryUtils</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -18,18 +19,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>GeometryLibrary</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>GeometryUtils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

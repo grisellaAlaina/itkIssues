@@ -15,5 +15,8 @@ public class App
         Triangle triangle = new Triangle(5, 6, 7, 8);
         System.out.println("Area of triangle: " + triangle.calculateArea());
         System.out.println("Perimeter of triangle: " + triangle.calculatePerimeter());
+
+        SomeUtil someUtil = new SomeUtil();
+        someUtil.utilMethod();
     }
 }

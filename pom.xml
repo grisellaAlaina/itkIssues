@@ -24,6 +24,7 @@
     <modules>
         <module>GeometryLibrary</module>
         <module>GeometryApp</module>
+        <module>GeometryLibrary/GeometryUtils</module>
     </modules>
     <scm>
         <connection/>
