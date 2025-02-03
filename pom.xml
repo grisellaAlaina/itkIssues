@@ -11,6 +11,7 @@
     <groupId>org.example</groupId>
     <artifactId>itkIssues</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>itkIssues</name>
     <description>itkIssues</description>
     <url/>
@@ -20,6 +21,10 @@
     <developers>
         <developer/>
     </developers>
+    <modules>
+        <module>GeometryLibrary</module>
+        <module>GeometryApp</module>
+    </modules>
     <scm>
         <connection/>
         <developerConnection/>
