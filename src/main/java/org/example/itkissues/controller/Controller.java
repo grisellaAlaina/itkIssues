@@ -1,18 +1,46 @@
 package org.example.itkissues.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.example.itkissues.model.User;
+import org.example.itkissues.repository.UserRepository;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Scanner;
 
 @RestController
+@RequestMapping()
+@AllArgsConstructor
 public class Controller {
+    private final UserRepository userRepository;
 
-    @GetMapping("/home")
-    public String home() {
-        return "Hello World";
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    @GetMapping("/private")
-    public String secret() {
-        return "welcome!";
+    @GetMapping("/home")
+    public String publicEndpoint() {
+        return "welcomee";
+    }
+
+    @GetMapping("/user")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('SUPER_ADMIN')")
+    public String userEndpoint() {
+        return "USER endpoint";
+    }
+
+    @GetMapping("/moderator")
+    @PreAuthorize("hasAnyRole('MODERATOR','SUPER_ADMIN')")
+    public String moderatorEndpoint() {
+        return "MODERATOR endpoint";
+    }
+
+    @GetMapping("/admin")
+    @Secured("SUPER_ADMIN")
+    public String adminEndpoint() {
+        return "ADMIN endpoint";
     }
 }
