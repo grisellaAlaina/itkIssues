@@ -1,7 +1,0 @@
-server:
-  port: 8080
-
-kafka:
-  bootstrap-servers: localhost:9092
-  topics:
-    new-orders: new_orders

@@ -1,0 +1,17 @@
+kafka:
+  bootstrap-servers: localhost:9092
+
+  topic:
+    name: web-logs
+    partitions: 3
+    replication-factor: 1
+
+  producer:
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  consumer:
+    group-id: itk-issues-group
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    concurrency: 3

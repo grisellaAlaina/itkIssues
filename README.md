@@ -1,12 +1,8 @@
 # itkIssues
 
-### create new order
+### generate logs
 ```bash
-curl -X POST http://localhost:8080/orders \
-     -H "Content-Type: application/json" \
-     -d '{
-           "name": "gggg"
-         }'
+curl -X POST "http://localhost:8080/api/weblog?message=5"
 ```
 
 
